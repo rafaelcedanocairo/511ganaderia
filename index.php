@@ -1,5 +1,5 @@
 <?php
-$config = require __DIR__ . '/config.php';
+$config = require __DIR__ . '/conf.php';
 $db = $config['db'];
 
 $dsn = sprintf(
@@ -151,7 +151,7 @@ function h(?string $value): string
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ganadería - Ficha Animal</title>
+    <title>511 Ganadería - Ficha Animal</title>
     <style>
         :root {
             color-scheme: light;
@@ -262,7 +262,7 @@ function h(?string $value): string
 </head>
 <body>
     <header>
-        <h1>Ficha Animal - Sistema Ganadero</h1>
+        <h1>Ficha Animal</h1>
         <p>Acceso rápido desde celular, tablet o computador.</p>
     </header>
 
@@ -390,65 +390,6 @@ function h(?string $value): string
                 </div>
                 <button type="submit">Registrar evento</button>
             </form>
-        </section>
-
-        <section class="card">
-            <h2>Inventario y reportes rápidos</h2>
-            <form method="get">
-                <div class="grid">
-                    <div>
-                        <label for="estado_filter">Estado</label>
-                        <select id="estado_filter" name="estado">
-                            <option value="">Todos</option>
-                            <option value="activo" <?= ($filters['estado'] ?? '') === 'activo' ? 'selected' : '' ?>>Activo</option>
-                            <option value="vendido" <?= ($filters['estado'] ?? '') === 'vendido' ? 'selected' : '' ?>>Vendido</option>
-                            <option value="muerto" <?= ($filters['estado'] ?? '') === 'muerto' ? 'selected' : '' ?>>Muerto</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="raza_filter">Raza</label>
-                        <input id="raza_filter" name="raza" value="<?= h($filters['raza'] ?? '') ?>" placeholder="Ej: Brahman">
-                    </div>
-                    <div>
-                        <label for="edad_min">Edad mínima (años)</label>
-                        <input id="edad_min" type="number" name="edad_min" value="<?= h($filters['edad_min'] ?? '') ?>">
-                    </div>
-                    <div>
-                        <label for="edad_max">Edad máxima (años)</label>
-                        <input id="edad_max" type="number" name="edad_max" value="<?= h($filters['edad_max'] ?? '') ?>">
-                    </div>
-                </div>
-                <button type="submit">Filtrar inventario</button>
-            </form>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ficha</th>
-                        <th>Nombre</th>
-                        <th>Raza</th>
-                        <th>Estado</th>
-                        <th>Fecha nacimiento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!$inventory) : ?>
-                        <tr>
-                            <td colspan="5">Sin resultados. Registra animales para visualizar el inventario.</td>
-                        </tr>
-                    <?php else : ?>
-                        <?php foreach ($inventory as $row) : ?>
-                            <tr>
-                                <td><?= h($row['ficha_no']) ?></td>
-                                <td><?= h($row['nombre']) ?></td>
-                                <td><?= h($row['raza']) ?></td>
-                                <td><span class="tag"><?= h($row['estado']) ?></span></td>
-                                <td><?= h($row['fecha_nacimiento']) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
         </section>
     </main>
 </body>
